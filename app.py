@@ -20,8 +20,8 @@ def inicia_chat():
     prompt = efetua_pergunta()
     
     while prompt.strip().lower() != 'sair':
-        # resposta = rag.executa_prompt(prompt)
-        resposta = rag.executa_prompt_reranking(prompt)
+        resposta = rag.executa_prompt(prompt, query_strategy=rag.multi_query_retriever_strategy)
+        # resposta = rag.executa_prompt_reranking(prompt)
 
         print(f'\n# RESPOSTA\n{resposta["resultado"]}\n')
         if resposta['fontes']:

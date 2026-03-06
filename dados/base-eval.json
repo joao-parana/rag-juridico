@@ -1,0 +1,512 @@
+[
+	{
+		"inputs": { "question": "O que é dado pessoal segundo a LGPD?" },
+		"outputs": {  "answer": "Dado pessoal é a informação relacionada a pessoa natural identificada ou identificável." },
+		"metadata": { "tema": "lgpd" }
+	},
+	{
+		"inputs": { "question": "O consentimento é a única base legal da LGPD?" },
+		"outputs": { "answer": "Não. A LGPD prevê outras bases legais além do consentimento." },
+		"metadata": { "tema": "lgpd" }
+	},
+	{
+		"inputs": { "question": "O fornecedor responde por vício do produto no CDC?" },
+		"outputs": { "answer": "Sim. O CDC prevê responsabilidade do fornecedor por vício do produto." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": {  "question": "O que é consumidor segundo o CDC?" },
+		"outputs": { "answer": "Consumidor é toda pessoa física ou jurídica que adquire ou utiliza produto ou serviço como destinatário final." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quem pode ser considerado fornecedor de acordo com o CDC?" },
+		"outputs": { "answer": "Fornecedor é toda pessoa física ou jurídica, pública ou privada, nacional ou estrangeira, bem como os entes despersonalizados, que desenvolvem atividade de produção, montagem, criação, construção, transformação, importação, exportação, distribuição, comercialização de produtos ou prestação de serviços." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O que é produto para o CDC?" },
+		"outputs": { "answer": "Produto é qualquer bem, móvel ou imóvel, material ou imaterial." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O que é serviço segundo o CDC?" },
+		"outputs": { "answer": "Serviço é qualquer atividade fornecida no mercado de consumo, mediante remuneração, inclusive as de natureza bancária, financeira, de crédito e securitária, salvo as decorrentes das relações de caráter trabalhista." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Qual é um dos princípios da Política Nacional das Relações de Consumo previsto no CDC?" },
+		"outputs": { "answer": "Um dos princípios é o reconhecimento da vulnerabilidade do consumidor no mercado de consumo." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "A Política Nacional das Relações de Consumo busca proteger quais aspectos do consumidor?" },
+		"outputs": { "answer": "Busca atender às necessidades dos consumidores, respeitar sua dignidade, saúde e segurança, proteger seus interesses econômicos, melhorar sua qualidade de vida e promover transparência e harmonia nas relações de consumo." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O CDC prevê prevenção e tratamento do superendividamento?" },
+		"outputs": { "answer": "Sim. O CDC inclui a prevenção e o tratamento do superendividamento como forma de evitar a exclusão social do consumidor." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quais são direitos básicos do consumidor relacionados à saúde e segurança?" },
+		"outputs": { "answer": "O consumidor tem direito à proteção da vida, saúde e segurança contra os riscos provocados por práticas no fornecimento de produtos e serviços considerados perigosos ou nocivos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O consumidor tem direito a informações claras sobre produtos e serviços?" },
+		"outputs": { "answer": "Sim. O CDC garante ao consumidor o direito à informação adequada e clara sobre quantidade, características, composição, qualidade, tributos incidentes, preço e riscos dos produtos e serviços." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O CDC protege o consumidor contra publicidade enganosa e abusiva?" },
+		"outputs": { "answer": "Sim. O CDC assegura proteção contra publicidade enganosa e abusiva, métodos comerciais coercitivos ou desleais e práticas e cláusulas abusivas." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "É possível revisar cláusulas contratuais excessivamente onerosas segundo o CDC?" },
+		"outputs": { "answer": "Sim. O consumidor tem direito à modificação de cláusulas contratuais que estabeleçam prestações desproporcionais ou à sua revisão em razão de fatos supervenientes que as tornem excessivamente onerosas." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O consumidor pode ter inversão do ônus da prova em processo civil?" },
+		"outputs": { "answer": "Sim. O CDC prevê a facilitação da defesa de seus direitos, inclusive com a inversão do ônus da prova em seu favor, quando for verossímil a alegação ou quando ele for hipossuficiente, a critério do juiz." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Produtos e serviços podem oferecer riscos à saúde e segurança do consumidor?" },
+		"outputs": { "answer": "Em regra, não. Os produtos e serviços colocados no mercado não devem acarretar riscos à saúde ou segurança, exceto os normais e previsíveis em razão de sua natureza, devendo o fornecedor prestar informações necessárias e adequadas." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O que o fornecedor deve fazer se descobrir depois que um produto é perigoso?" },
+		"outputs": { "answer": "Deve comunicar imediatamente o fato às autoridades competentes e aos consumidores, mediante anúncios publicitários." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "A responsabilidade do fabricante por defeito do produto depende de culpa?" },
+		"outputs": { "answer": "Não. O fabricante, produtor, construtor e importador respondem independentemente da existência de culpa pelos danos causados por defeitos do produto." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quando um produto é considerado defeituoso pelo CDC?" },
+		"outputs": { "answer": "Quando não oferece a segurança que dele legitimamente se espera, consideradas circunstâncias como sua apresentação, o uso e os riscos razoavelmente esperados e a época em que foi colocado em circulação." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Em quais situações o comerciante também pode ser responsabilizado por defeito do produto?" },
+		"outputs": { "answer": "Quando o fabricante, produtor, construtor ou importador não puderem ser identificados, quando o produto for fornecido sem identificação clara do fabricante ou importador, ou quando não conservar adequadamente produtos perecíveis." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O fornecedor de serviços responde por defeitos na prestação do serviço?" },
+		"outputs": { "answer": "Sim. O fornecedor de serviços responde, independentemente de culpa, pelos danos causados por defeitos relativos à prestação dos serviços e por informações insuficientes ou inadequadas sobre sua fruição e riscos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "A responsabilidade pessoal dos profissionais liberais no CDC é objetiva?" },
+		"outputs": { "answer": "Não. A responsabilidade pessoal dos profissionais liberais será apurada mediante a verificação de culpa." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Se um produto apresentar vício e o problema não for resolvido em 30 dias, o que o consumidor pode exigir?" },
+		"outputs": { "answer": "Pode exigir, alternativamente e à sua escolha, a substituição do produto por outro da mesma espécie em perfeitas condições de uso, a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de perdas e danos, ou o abatimento proporcional do preço." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Em caso de produto essencial com vício, o consumidor precisa esperar 30 dias para exigir solução?" },
+		"outputs": { "answer": "Não necessariamente. Em razão da extensão do vício, se a substituição das partes viciadas comprometer a qualidade ou características do produto, diminuir-lhe o valor ou se tratar de produto essencial, o consumidor pode fazer uso imediato das alternativas legais." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quais produtos são considerados impróprios ao uso e consumo?" },
+		"outputs": { "answer": "São impróprios, entre outros, os produtos com prazo de validade vencido, deteriorados, adulterados, avariados, falsificados, nocivos à vida ou à saúde, perigosos, em desacordo com normas regulamentares ou inadequados ao fim a que se destinam." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O fornecedor de serviços responde por vício de qualidade do serviço?" },
+		"outputs": { "answer": "Sim. O consumidor pode exigir, alternativamente, a reexecução dos serviços sem custo adicional, a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de perdas e danos, ou o abatimento proporcional do preço." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Na reparação de um produto, o fornecedor pode usar qualquer peça?" },
+		"outputs": { "answer": "Não. Considera-se implícita a obrigação de empregar componentes de reposição originais adequados e novos, ou que mantenham as especificações técnicas do fabricante, salvo autorização em contrário do consumidor quanto a estes últimos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Os serviços públicos essenciais devem ser contínuos segundo o CDC?" },
+		"outputs": { "answer": "Sim. Os órgãos públicos e suas concessionárias ou permissionárias são obrigados a fornecer serviços adequados, eficientes, seguros e, quanto aos essenciais, contínuos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "A garantia legal do produto depende de documento expresso?" },
+		"outputs": { "answer": "Não. A garantia legal de adequação do produto ou serviço independe de termo expresso, sendo vedada a exoneração contratual do fornecedor." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Qual é o prazo para reclamar de vício aparente em produto não durável?" },
+		"outputs": { "answer": "O prazo é de trinta dias." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Qual é o prazo para reclamar de vício aparente em produto durável?" },
+		"outputs": { "answer": "O prazo é de noventa dias." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quando começa a contar o prazo decadencial em caso de vício oculto?" },
+		"outputs": { "answer": "O prazo decadencial inicia-se no momento em que ficar evidenciado o defeito." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Qual é o prazo prescricional para pedir reparação por danos causados por fato do produto ou do serviço?" },
+		"outputs": { "answer": "A pretensão prescreve em cinco anos, contados a partir do conhecimento do dano e de sua autoria." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Toda publicidade suficientemente precisa integra o contrato?" },
+		"outputs": { "answer": "Sim. Toda informação ou publicidade suficientemente precisa, veiculada por qualquer forma ou meio de comunicação, obriga o fornecedor e integra o contrato que vier a ser celebrado." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quais informações a oferta e apresentação de produtos ou serviços devem trazer?" },
+		"outputs": { "answer": "Devem assegurar informações corretas, claras, precisas, ostensivas e em língua portuguesa sobre características, qualidades, quantidade, composição, preço, garantia, prazo de validade, origem e riscos à saúde e segurança." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Se o fornecedor recusar cumprir a oferta, o que o consumidor pode fazer?" },
+		"outputs": { "answer": "Pode exigir o cumprimento forçado da obrigação, aceitar outro produto ou serviço equivalente, ou rescindir o contrato com direito à restituição da quantia antecipada, atualizada monetariamente, além de perdas e danos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Como a publicidade deve ser apresentada ao consumidor?" },
+		"outputs": { "answer": "A publicidade deve ser veiculada de forma que o consumidor, fácil e imediatamente, a identifique como tal." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O que é publicidade enganosa segundo o CDC?" },
+		"outputs": { "answer": "É qualquer modalidade de informação ou comunicação de caráter publicitário, inteira ou parcialmente falsa, ou que por omissão ou outro modo seja capaz de induzir o consumidor em erro sobre natureza, características, qualidade, quantidade, propriedades, origem, preço ou quaisquer outros dados de produtos e serviços." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O que é publicidade abusiva no CDC?" },
+		"outputs": { "answer": "É, entre outras, a publicidade discriminatória, a que incita à violência, explora o medo ou a superstição, se aproveita da deficiência de julgamento e experiência da criança, desrespeita valores ambientais ou induz o consumidor a comportamento prejudicial ou perigoso à sua saúde ou segurança." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quem tem o ônus da prova da veracidade da publicidade?" },
+		"outputs": { "answer": "O ônus da prova da veracidade e correção da informação ou comunicação publicitária cabe a quem a patrocina." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Venda casada é permitida pelo CDC?" },
+		"outputs": { "answer": "Não. É vedado condicionar o fornecimento de produto ou serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, impor limites quantitativos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Se o fornecedor enviar um produto sem solicitação prévia, o consumidor é obrigado a pagar?" },
+		"outputs": { "answer": "Não. Produtos ou serviços enviados sem solicitação prévia equiparam-se a amostras grátis, inexistindo obrigação de pagamento." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O fornecedor pode executar serviço sem orçamento prévio e autorização expressa?" },
+		"outputs": { "answer": "Não. Isso é vedado, salvo nas hipóteses decorrentes de práticas anteriores entre as partes." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quais informações devem constar no orçamento prévio de um serviço?" },
+		"outputs": { "answer": "Devem constar o valor da mão de obra, dos materiais e equipamentos a serem empregados, as condições de pagamento e as datas de início e término dos serviços." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Na cobrança de dívidas, o consumidor inadimplente pode ser exposto ao ridículo?" },
+		"outputs": { "answer": "Não. O consumidor inadimplente não será exposto a ridículo, nem submetido a qualquer tipo de constrangimento ou ameaça." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Se o consumidor pagar quantia indevida em cobrança, qual é o direito dele?" },
+		"outputs": { "answer": "Tem direito à repetição do indébito, por valor igual ao dobro do que pagou em excesso, acrescido de correção monetária e juros legais, salvo hipótese de engano justificável." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "O consumidor pode acessar informações existentes em cadastros e bancos de dados sobre ele?" },
+		"outputs": { "answer": "Sim. O consumidor tem acesso às informações existentes em cadastros, fichas, registros e dados pessoais e de consumo arquivados sobre ele, bem como às suas respectivas fontes." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Por quanto tempo informações negativas podem permanecer em cadastros de consumidores?" },
+		"outputs": { "answer": "Os cadastros não podem conter informações negativas referentes a período superior a cinco anos." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Se houver erro nos dados do consumidor em cadastro, o que deve acontecer?" },
+		"outputs": { "answer": "O consumidor pode exigir a imediata correção, e o arquivista deve comunicar a alteração aos eventuais destinatários das informações incorretas no prazo de cinco dias úteis." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Os contratos de consumo obrigam o consumidor mesmo sem oportunidade de leitura prévia?" },
+		"outputs": { "answer": "Não. Os contratos não obrigarão os consumidores se não lhes for dada a oportunidade de tomar conhecimento prévio de seu conteúdo ou se forem redigidos de modo a dificultar a compreensão." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Como as cláusulas contratuais devem ser interpretadas nas relações de consumo?" },
+		"outputs": { "answer": "As cláusulas contratuais serão interpretadas de maneira mais favorável ao consumidor." },
+		"metadata": { "tema": "cdc" }
+	},
+	{
+		"inputs": { "question": "Quem ganhou a Copa do Mundo de 2002?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Qual é a capital do Japão?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Como funciona a fotossíntese nas plantas?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Quem escreveu Dom Casmurro?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Qual é a fórmula química da água?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Quem foi o primeiro homem a pisar na Lua?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Quanto é 25 vezes 4?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Qual linguagem é mais usada para ciência de dados?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Em que ano começou a Segunda Guerra Mundial?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Qual é o maior planeta do Sistema Solar?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": { "question": "Quem ganhou a Copa do Mundo de 2002?" },
+		"outputs": { "answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD." },
+		"metadata": { "tema": "fora_escopo" }
+	},
+	{
+		"inputs": {"question": "O que é a LGPD?"},
+		"outputs": {"answer": "A Lei Geral de Proteção de Dados Pessoais (LGPD) é a lei brasileira que regula o tratamento de dados pessoais por pessoas físicas ou jurídicas, públicas ou privadas, com o objetivo de proteger os direitos fundamentais de liberdade, privacidade e o livre desenvolvimento da personalidade."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que são dados pessoais segundo a LGPD?"},
+		"outputs": {"answer": "Dados pessoais são informações relacionadas a pessoa natural identificada ou identificável."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que são dados pessoais sensíveis na LGPD?"},
+		"outputs": {"answer": "Dados pessoais sensíveis são dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação sindical, dados referentes à saúde ou vida sexual, dados genéticos ou biométricos quando vinculados a uma pessoa natural."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que é tratamento de dados pessoais segundo a LGPD?"},
+		"outputs": {"answer": "Tratamento de dados é toda operação realizada com dados pessoais, como coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação ou controle da informação."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quem é o titular de dados na LGPD?"},
+		"outputs": {"answer": "Titular é a pessoa natural a quem se referem os dados pessoais que são objeto de tratamento."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quem é o controlador de dados segundo a LGPD?"},
+		"outputs": {"answer": "Controlador é a pessoa natural ou jurídica responsável por tomar as decisões referentes ao tratamento de dados pessoais."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quem é o operador na LGPD?"},
+		"outputs": {"answer": "Operador é a pessoa natural ou jurídica que realiza o tratamento de dados pessoais em nome do controlador."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que é encarregado de dados (DPO) na LGPD?"},
+		"outputs": {"answer": "O encarregado é a pessoa indicada pelo controlador para atuar como canal de comunicação entre o controlador, os titulares de dados e a Autoridade Nacional de Proteção de Dados."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Qual é o principal objetivo da LGPD?"},
+		"outputs": {"answer": "O objetivo é proteger os direitos fundamentais de liberdade e privacidade e o livre desenvolvimento da personalidade da pessoa natural."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "A LGPD se aplica apenas a empresas brasileiras?"},
+		"outputs": {"answer": "Não. A LGPD se aplica a qualquer operação de tratamento realizada no Brasil, que tenha como objetivo oferecer bens ou serviços para indivíduos no Brasil ou que trate dados coletados no país."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quais são os princípios da LGPD?"},
+		"outputs": {"answer": "Entre os princípios estão finalidade, adequação, necessidade, livre acesso, qualidade dos dados, transparência, segurança, prevenção, não discriminação e responsabilização."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que significa o princípio da finalidade na LGPD?"},
+		"outputs": {"answer": "Significa que o tratamento de dados deve ter propósitos legítimos, específicos e informados ao titular."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que significa o princípio da necessidade na LGPD?"},
+		"outputs": {"answer": "Significa que o tratamento deve limitar-se ao mínimo necessário para a realização de suas finalidades."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que significa o princípio da transparência na LGPD?"},
+		"outputs": {"answer": "Significa que os titulares devem receber informações claras, precisas e facilmente acessíveis sobre o tratamento de seus dados."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que significa o princípio da segurança na LGPD?"},
+		"outputs": {"answer": "Significa que devem ser adotadas medidas técnicas e administrativas para proteger os dados pessoais contra acessos não autorizados e situações acidentais ou ilícitas."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quais são os direitos dos titulares de dados segundo a LGPD?"},
+		"outputs": {"answer": "Os titulares têm direitos como confirmação da existência de tratamento, acesso aos dados, correção de dados incompletos ou desatualizados, anonimização, bloqueio ou eliminação de dados e portabilidade."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O titular pode solicitar a exclusão de seus dados pessoais?"},
+		"outputs": {"answer": "Sim. O titular pode solicitar a eliminação de dados pessoais tratados com base no consentimento."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que é consentimento na LGPD?"},
+		"outputs": {"answer": "Consentimento é a manifestação livre, informada e inequívoca pela qual o titular concorda com o tratamento de seus dados pessoais para uma finalidade determinada."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O consentimento pode ser revogado segundo a LGPD?"},
+		"outputs": {"answer": "Sim. O consentimento pode ser revogado a qualquer momento mediante manifestação expressa do titular."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "A LGPD permite tratamento de dados sem consentimento?"},
+		"outputs": {"answer": "Sim. O tratamento pode ocorrer sem consentimento quando houver outras bases legais previstas na LGPD, como cumprimento de obrigação legal, execução de contrato ou legítimo interesse."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que é anonimização na LGPD?"},
+		"outputs": {"answer": "Anonimização é o uso de meios técnicos razoáveis e disponíveis para tornar os dados pessoais impossíveis de serem associados a um indivíduo."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que é a ANPD?"},
+		"outputs": {"answer": "A ANPD é a Autoridade Nacional de Proteção de Dados, órgão responsável por fiscalizar e regulamentar a aplicação da LGPD no Brasil."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quais sanções podem ser aplicadas pela ANPD?"},
+		"outputs": {"answer": "Entre as sanções estão advertência, multa simples, multa diária, publicização da infração, bloqueio dos dados pessoais e eliminação dos dados."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Qual o valor máximo de multa previsto na LGPD?"},
+		"outputs": {"answer": "A multa pode chegar a até 2% do faturamento da empresa no Brasil, limitada a 50 milhões de reais por infração."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que é relatório de impacto à proteção de dados?"},
+		"outputs": {"answer": "É a documentação que descreve os processos de tratamento de dados pessoais que podem gerar riscos às liberdades civis e aos direitos fundamentais."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "A LGPD se aplica a dados de pessoas falecidas?"},
+		"outputs": {"answer": "Não. A LGPD protege dados pessoais de pessoas naturais vivas."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Empresas devem adotar medidas de segurança para proteger dados pessoais?"},
+		"outputs": {"answer": "Sim. A LGPD exige medidas técnicas e administrativas para proteger os dados pessoais contra acesso não autorizado e incidentes de segurança."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "O que deve ocorrer em caso de incidente de segurança envolvendo dados pessoais?"},
+		"outputs": {"answer": "O controlador deve comunicar o incidente à Autoridade Nacional de Proteção de Dados e, em certos casos, aos titulares afetados."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Dados pessoais podem ser compartilhados entre empresas?"},
+		"outputs": {"answer": "Sim, desde que haja base legal para o tratamento e que os princípios da LGPD sejam respeitados."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "A LGPD se aplica ao setor público?"},
+		"outputs": {"answer": "Sim. Órgãos públicos também devem cumprir as regras da LGPD no tratamento de dados pessoais."},
+		"metadata": {"tema": "lgpd"}
+	},
+	{
+		"inputs": {"question": "Quem descobriu o Brasil?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Qual é a capital da Argentina?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Como funciona a gravidade na física?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Quem ganhou o Oscar de melhor filme em 2020?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Qual é a montanha mais alta do mundo?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "O que é inteligência artificial?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Qual é o maior oceano do planeta?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Quem pintou a Mona Lisa?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "Qual é a velocidade da luz?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	},
+	{
+		"inputs": {"question": "O que é programação orientada a objetos?"},
+		"outputs": {"answer": "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."},
+		"metadata": {"tema": "fora_escopo"}
+	}
+]

@@ -1,12 +1,28 @@
 from typing import Any
+from itertools import chain
 import dotenv
-import bd
 
 from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough, RunnableLambda, RunnableParallel
+from langchain_core.runnables import Runnable, RunnablePassthrough, RunnableLambda, RunnableParallel
+
+from langchain_classic.evaluation import load_evaluator, EvaluatorType
+
+import bd
+config = dotenv.dotenv_values()
+
+
+####
+# FUNÇÕES AUXILIARES
+####
+
+def extrai_fonte(documento: Document) -> str:
+    fonte = documento.metadata.get('fonte', 'desconhecida')
+    pagina = documento.metadata.get('page', 'desconhecida')
+
+    return f'Fonte: {fonte} - Página: {pagina}'
 
 
 def monta_resposta_com_fontes(completion: str, documentos: list[Document]) -> dict[str, Any]:
@@ -25,19 +41,14 @@ def gera_contexto_de_documentos(documentos: list[Document]) -> str:
     return "\n\n".join([doc.page_content for doc in documentos])
 
 
-def extrai_fonte(documento: Document) -> str:
-    fonte = documento.metadata.get('fonte', 'desconhecida')
-    pagina = documento.metadata.get('page', 'desconhecida')
-
-    return f'Fonte: {fonte} - Página: {pagina}'
-
-
-config = dotenv.dotenv_values()
+####
+# Setup de RAG e LLM
+####
 
 banco_vetorial = bd.carrega_banco_vetorial()
 retriever = banco_vetorial.as_retriever(search_type='similarity', search_kwargs={'k': 5})
 
-llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_KEY'])
+llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_API_KEY'])
 rag_prompt = ChatPromptTemplate.from_messages([
     (
         "system",
@@ -52,21 +63,102 @@ rag_prompt = ChatPromptTemplate.from_messages([
     )
 ])
 
-pesquisa_documentos = RunnableParallel(pergunta=RunnablePassthrough(), documentos=retriever)
 monta_contexto = RunnablePassthrough.assign(contexto=lambda payload: gera_contexto_de_documentos(payload['documentos']))
-executa_prompt = RunnablePassthrough.assign(resposta=RunnablePassthrough() | rag_prompt | llm | StrOutputParser())
-monta_resposta = RunnableLambda(lambda payload: monta_resposta_com_fontes(payload['resposta'], payload['documentos']))
-
-llm_com_rag = (
-    pesquisa_documentos # {pergunta: str, documentos: list[Document]}
-    | monta_contexto # {pergunta: str, documentos: list[Document], contexto: str}
-    | executa_prompt # {pergunta: str, documentos: list[Document], contexto: str, resposta: str}
-    | monta_resposta # {resultado: str, fontes: list[str]}
-)
+invoca_llm = RunnablePassthrough.assign(resposta=RunnablePassthrough() | rag_prompt | llm | StrOutputParser())
+monta_resultado = RunnableLambda(lambda payload: monta_resposta_com_fontes(payload['resposta'], payload['documentos']))
 
 
-def executa_prompt(prompt: str) -> dict[str, Any]:
+def retriever_padrao_strategy() -> RunnableParallel:
+    return RunnableParallel(pergunta=RunnablePassthrough(), documentos=retriever)
+
+####
+# IMPLEMENTA TÉCNICA DE CONSULTA REWRITE-RETRIEVE-READ
+####
+
+def rewrite_retrieve_read_strategy() -> Runnable:
+    prompt_rewrite = PromptTemplate(
+        input_variables=["pergunta"],
+        template='''
+Você é um especialista no Código de Defesa do Consumidor (CDC) e na Lei Geral de Proteção de Dados (LGPD).
+Sua tarefa é reescrever a pergunta do usuário para torná-la mais clara e específica, facilitando a recuperação de informações relevantes sobre o CDC ou a LGPD.
+Se a pergunta já for clara e específica, mantenha seu conteúdo, mas reescreva-a de forma mais formal e objetiva.
+Se a pergunta não estiver relacionada ao CDC ou à LGPD, reescreva-a de forma a indicar que o assistente só pode responder perguntas sobre esses temas.
+
+**Retorne somente a pergunta reescrita, sem explicações adicionais.**
+Reescreva a seguinte pergunta:
+{pergunta}
+'''
+    )
+
+    return (
+        (lambda pergunta: {"pergunta": pergunta})
+        | prompt_rewrite
+        | llm
+        | StrOutputParser()
+        | RunnableParallel(
+            pergunta=RunnablePassthrough(), 
+            documentos=retriever
+        )
+    )
+    
+
+
+# ####
+# # IMPLEMENTA TÉCNICA MULTI QUERY RETRIEVER
+# ####
+def elimina_duplicatas(documentos: list[Document]) -> list[Document]:
+    vistos = set()
+    resultado = []
+    for doc in documentos:
+        if doc.page_content not in vistos:
+            resultado.append(doc)
+            vistos.add(doc.page_content)
+
+    return resultado
+
+def multi_query_retriever_strategy() -> Runnable:
+    prompt_multi_query = PromptTemplate(
+        input_variables=["pergunta"],
+        template='''
+Você é um especialista no Código de Defesa do Consumidor (CDC) e na Lei Geral de Proteção de Dados (LGPD).
+Sua tarefa é gerar 3 variações da pergunta do usuário, mantendo o mesmo significado, mas utilizando palavras e estruturas diferentes. 
+O objetivo é aumentar a diversidade de documentos recuperados, melhorando as chances de encontrar informações relevantes sobre o CDC ou a LGPD.
+Se a pergunta não estiver relacionada ao CDC ou à LGPD, reescreva-a de forma a indicar que o assistente só pode responder perguntas sobre esses temas.
+
+**Retorne somente as 3 variações da pergunta, separadas por linha, sem explicações adicionais.**
+Gere variações para a seguinte pergunta:
+{pergunta}
+'''
+    )
+
+    return (
+        (lambda pergunta: {"pergunta": pergunta})
+        | RunnablePassthrough.assign(novas_perguntas=prompt_multi_query | llm | StrOutputParser() | (lambda resposta: resposta.split('\n')))
+        | RunnableParallel(
+            pergunta=lambda payload: payload['pergunta'], 
+            # documentos=lambda payload: [doc for doc in retriever.invoke(pergunta) for pergunta in payload['novas_perguntas']]
+            documentos=lambda payload: elimina_duplicatas(chain.from_iterable([retriever.invoke(pergunta) for pergunta in payload['novas_perguntas']]))
+        )
+    )
+
+
+def executa_prompt(prompt: str, query_strategy: callable = retriever_padrao_strategy) -> dict[str, Any]:
+    pesquisa_documentos = query_strategy()
+
+    llm_com_rag = (
+        pesquisa_documentos # {pergunta: str, documentos: list[Document]}
+        | monta_contexto # {pergunta: str, documentos: list[Document], contexto: str}
+        | invoca_llm # {pergunta: str, documentos: list[Document], contexto: str, resposta: str}
+        | monta_resultado # {resultado: str, fontes: list[str]}
+    )
+    
     return llm_com_rag.invoke(prompt)
+
+
+###
+# AVALIA MODELO COM QAEvalChain
+###
+eval = load_evaluator(EvaluatorType.QA, llm=llm)
 
 
 ####
@@ -135,8 +227,4 @@ Contexto: {contexto}
     )
 
     return cadeia.invoke(prompt)
-    
-
-    
-
     

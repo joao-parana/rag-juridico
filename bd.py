@@ -13,7 +13,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter, CharacterTe
 config = dotenv.dotenv_values()
 db_dir = Path(config['CHROMA_DB_PATH'])
 
-embedding = OpenAIEmbeddings(model=config['EMBEDDINGS_MODEL'], openai_api_key=config['OPENAI_KEY'])
+embedding = OpenAIEmbeddings(model=config['EMBEDDINGS_MODEL'], openai_api_key=config['OPENAI_API_KEY'])
 
 def le_pdf(caminho: str) -> list[Document]:
     loader = PyPDFLoader(caminho)
