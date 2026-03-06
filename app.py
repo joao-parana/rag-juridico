@@ -1,5 +1,7 @@
-import rag
+from dotenv import load_dotenv
+load_dotenv()
 
+import rag
 
 def efetua_pergunta():
     print('---\n')
