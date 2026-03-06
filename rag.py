@@ -4,22 +4,25 @@ import bd
 
 from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
-from langchain_classic.chains import RetrievalQA
-from langchain_core.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough, RunnableLambda, RunnableParallel
 
 
-config = dotenv.dotenv_values()
+def monta_resposta_com_fontes(completion: str, documentos: list[Document]) -> dict[str, Any]:
+    resposta = {
+        'resultado': completion.strip(),
+        'fontes': []
+    }
 
-banco_vetorial = bd.carrega_banco_vetorial()
-retriever = banco_vetorial.as_retriever(search_type='similarity', search_kwargs={'k': 5})
+    if resposta['resultado'] != 'Desculpe, só posso responder perguntas sobre o CDC e a LGPD.':
+        resposta['fontes'] = [extrai_fonte(doc) for doc in documentos]
 
-llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_KEY'])
-llm_com_rag = RetrievalQA.from_chain_type(
-    llm=llm, 
-    retriever=retriever, 
-    return_source_documents=True,
-    chain_type='stuff'
-)
+    return resposta
+
+
+def gera_contexto_de_documentos(documentos: list[Document]) -> str:
+    return "\n\n".join([doc.page_content for doc in documentos])
 
 
 def extrai_fonte(documento: Document) -> str:
@@ -29,26 +32,42 @@ def extrai_fonte(documento: Document) -> str:
     return f'Fonte: {fonte} - Página: {pagina}'
 
 
+config = dotenv.dotenv_values()
+
+banco_vetorial = bd.carrega_banco_vetorial()
+retriever = banco_vetorial.as_retriever(search_type='similarity', search_kwargs={'k': 5})
+
+llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_KEY'])
+rag_prompt = ChatPromptTemplate.from_messages([
+    (
+        "system",
+        "Você é um assistente jurídico especializado em responder perguntas sobre o "
+        "Código de Defesa do Consumidor (CDC) e a Lei Geral de Proteção de Dados (LGPD). "
+        "Use o contexto para responder. Se a pergunta não estiver relacionada ao CDC ou à LGPD, responda exatamente: "
+        "Desculpe, só posso responder perguntas sobre o CDC e a LGPD.",
+    ),
+    (
+        "human", 
+        "Pergunta:\n{pergunta}\nContexto:\n{contexto}"
+    )
+])
+
+pesquisa_documentos = RunnableParallel(pergunta=RunnablePassthrough(), documentos=retriever)
+monta_contexto = RunnablePassthrough.assign(contexto=lambda payload: gera_contexto_de_documentos(payload['documentos']))
+executa_prompt = RunnablePassthrough.assign(resposta=RunnablePassthrough() | rag_prompt | llm | StrOutputParser())
+monta_resposta = RunnableLambda(lambda payload: monta_resposta_com_fontes(payload['resposta'], payload['documentos']))
+
+llm_com_rag = (
+    pesquisa_documentos # {pergunta: str, documentos: list[Document]}
+    | monta_contexto # {pergunta: str, documentos: list[Document], contexto: str}
+    | executa_prompt # {pergunta: str, documentos: list[Document], contexto: str, resposta: str}
+    | monta_resposta # {resultado: str, fontes: list[str]}
+)
+
+
 def executa_prompt(prompt: str) -> dict[str, Any]:
-    prompt_final = f'''
-Você é um assistente jurídico especializado em responder perguntas sobre o Código de Defesa do Consumidor (CDC) e a Lei Geral de Proteção de Dados (LGPD).
+    return llm_com_rag.invoke(prompt)
 
-Utilize o contexto fornecido para responder à pergunta.
-Se a pergunta não estiver relacionada ao CDC ou à LGPD, responda exatamente esta frase: "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."
-
-Pergunta: {prompt}
-'''
-
-    completion = llm_com_rag.invoke({"query": prompt_final})
-    resposta = {
-        'resultado': completion['result'],
-        'fontes': []
-    }
-    
-    if resposta['resultado'].strip() != 'Desculpe, só posso responder perguntas sobre o CDC e a LGPD.':
-        resposta['fontes'] = [extrai_fonte(doc) for doc in completion['source_documents']]
-
-    return resposta
 
 ####
 # RANKING MANUAL (Reranking)
@@ -76,24 +95,13 @@ Trecho: {trecho}
 '''
     )
 
-    # Consulta a base vetorial
     documentos_iniciais = banco_vetorial.similarity_search(prompt_original, k=15)
+    msgs_rankeamento = [prompt_de_rankeamento.format(pergunta=prompt_original, trecho=doc.page_content) for doc in documentos_iniciais]
     
-    rankeados = []
-    for doc in documentos_iniciais:
+    respostas = llm.batch(msgs_rankeamento)
+    rankeados = [(doc, float(resposta.content.strip())) for doc, resposta in zip(documentos_iniciais, respostas)]
 
-        ### Perceba que estamos invocando a IA generativa SEM o retriever da base vetorial (variável llm_com_rag). 
-        ## Ou seja, a IA generativa não tem acesso a outros documentos além do trecho que estamos avaliando.
-        resposta = llm.invoke(prompt_de_rankeamento.format(pergunta=prompt_original, trecho=doc.page_content)).content.strip()
-
-        try:
-            score = float(resposta)
-        except ValueError:
-            score = 0
-
-        rankeados.append((doc, score))
-
-    # Rankeia e mapeia para um array somente com os documentos.
+    # Ordena do mais relevante para o menos em uma lista de documentos
     rankeados.sort(key=lambda x: x[1], reverse=True)
     return [doc for doc, score in rankeados]
 
@@ -105,30 +113,30 @@ Trecho: {trecho}
 # à IA generativa para responder à pergunta do usuário.
 ####
 def executa_prompt_reranking(prompt: str) -> dict[str, Any]:
-    documentos_rankeados = rankeia_documentos(prompt)
-    top_4_documentos = documentos_rankeados[:4]
-
-    contexto_consolidado = "\n\n".join([doc.page_content for doc in top_4_documentos])
-    prompt_final = f'''
+    prompt_final = PromptTemplate(
+        input_variables=["prompt", "contexto"],
+        template='''
 Você é um assistente jurídico especializado em responder perguntas sobre o Código de Defesa do Consumidor (CDC) e a Lei Geral de Proteção de Dados (LGPD).
 
 Utilize o contexto fornecido para responder à pergunta.
 Se a pergunta não estiver relacionada ao CDC ou à LGPD, responda exatamente esta frase: "Desculpe, só posso responder perguntas sobre o CDC e a LGPD."
 
 Pergunta: {prompt}
-Contexto: {contexto_consolidado}
+Contexto: {contexto}
 '''
-    
-    # Perceba que com o Reranking manual, a IA generativa é invocada diretamente (variável llm) e não mais através do chain de RAG (variável llm_com_rag).
-    completion = llm.invoke(prompt_final)
-    
-    # A estrutura da resposta é diferente do método com RAG, pois não temos mais acesso aos "source_documents" (documentos de origem) que o chain de RAG fornecia.
-    resposta = {
-        'resultado': completion.content,
-        'fontes': []
-    }
+    )
 
-    if resposta['resultado'].strip() != 'Desculpe, só posso responder perguntas sobre o CDC e a LGPD.':
-        resposta['fontes'] = [extrai_fonte(doc) for doc in top_4_documentos]
+    cadeia = (
+        RunnableParallel(prompt=RunnablePassthrough(), documentos=rankeia_documentos) 
+        | (lambda payload: {'prompt': payload["prompt"], 'documentos': payload["documentos"][:4]})
+        | RunnablePassthrough.assign(contexto=lambda payload: gera_contexto_de_documentos(payload["documentos"]))
+        | RunnablePassthrough.assign(resposta=RunnablePassthrough() | prompt_final | llm | StrOutputParser())
+        | monta_resposta
+    )
 
-    return resposta
+    return cadeia.invoke(prompt)
+    
+
+    
+
+    
