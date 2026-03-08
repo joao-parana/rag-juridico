@@ -8,8 +8,6 @@ from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import Runnable, RunnablePassthrough, RunnableLambda, RunnableParallel
 
-from langchain_classic.evaluation import load_evaluator, EvaluatorType
-
 import bd
 config = dotenv.dotenv_values()
 
@@ -153,12 +151,6 @@ def executa_prompt(prompt: str, query_strategy: callable = retriever_padrao_stra
     )
     
     return llm_com_rag.invoke(prompt)
-
-
-###
-# AVALIA MODELO COM QAEvalChain
-###
-eval = load_evaluator(EvaluatorType.QA, llm=llm)
 
 
 ####
