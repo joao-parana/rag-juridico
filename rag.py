@@ -2,7 +2,6 @@ from typing import Any
 import dotenv
 import bd
 
-from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
 from langchain_classic.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
@@ -13,7 +12,12 @@ config = dotenv.dotenv_values()
 banco_vetorial = bd.carrega_banco_vetorial()
 retriever = banco_vetorial.as_retriever(search_type='similarity', search_kwargs={'k': 5})
 
-llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_KEY'])
+if bd.use_ollama:
+    from langchain_ollama import ChatOllama
+    llm = ChatOllama(model='llama3.2')
+else:
+    from langchain_openai import ChatOpenAI
+    llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_KEY'])
 llm_com_rag = RetrievalQA.from_chain_type(
     llm=llm, 
     retriever=retriever, 

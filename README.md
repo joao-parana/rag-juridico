@@ -12,7 +12,8 @@ O direcionamento das tarefas a serem desenvolvidas estão neste [quadro do Trell
 
 ```bash
 python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade langchain langchain-openai langchain-community langchain-chroma pypdf python-dotenv
+python3 -m pip install --upgrade langchain langchain-openai langchain_ollama \
+        langchain-community langchain-chroma pypdf python-dotenv
 ```
 
 ## Estrutura do projeto
