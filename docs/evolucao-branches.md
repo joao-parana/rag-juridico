@@ -4,6 +4,15 @@
 
 ---
 
+> **💡 Execução local sem custos de API**
+> Todas as branches suportam a variável `USE_OLLAMA = True` no `.env` para substituir a API da OpenAI por modelos locais via **Ollama**:
+> - LLM: `llama3.2` (geração de respostas)
+> - Embeddings: `nomic-embed-text` (indexação e busca vetorial)
+>
+> Basta instalar o pacote `langchain-ollama`, ter o [Ollama](https://ollama.com) rodando localmente e definir `USE_OLLAMA = True`. Quando ativo, as variáveis `OPENAI_KEY`, `EMBEDDINGS_MODEL` e `LLM_MODEL` são ignoradas. Os documentos são reindexados em uma coleção separada (`documentos_juridicos_ollama`) para evitar incompatibilidade de dimensões entre os dois modelos de embedding.
+
+---
+
 ## Índice
 
 1. [Visão Geral do Projeto](#1-visão-geral-do-projeto)
