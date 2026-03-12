@@ -6,14 +6,22 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFLoader
 
-from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter, CharacterTextSplitter
 
 
 config = dotenv.dotenv_values()
 db_dir = Path(config['CHROMA_DB_PATH'])
 
-embedding = OpenAIEmbeddings(model=config['EMBEDDINGS_MODEL'], openai_api_key=config['OPENAI_API_KEY'])
+use_ollama = config.get('USE_OLLAMA', 'False').strip().lower() == 'true'
+
+if use_ollama:
+    from langchain_ollama import OllamaEmbeddings
+    embedding = OllamaEmbeddings(model='nomic-embed-text')
+    collection_name = 'documentos_juridicos_ollama'
+else:
+    from langchain_openai import OpenAIEmbeddings
+    embedding = OpenAIEmbeddings(model=config['EMBEDDINGS_MODEL'], openai_api_key=config['OPENAI_API_KEY'])
+    collection_name = 'documentos_juridicos'
 
 def le_pdf(caminho: str) -> list[Document]:
     loader = PyPDFLoader(caminho)
@@ -69,14 +77,14 @@ def cria_chunks(documentos: dict[str, list[Document]]) -> dict[str, list[Documen
 def carrega_banco_vetorial() -> Chroma:
     if db_dir.exists():
         print('Banco de dados vetorial já existe. Carregando...\n')
-        return Chroma(embedding_function=embedding, persist_directory=str(db_dir), collection_name='documentos_juridicos')
+        return Chroma(embedding_function=embedding, persist_directory=str(db_dir), collection_name=collection_name)
 
     documentos = carrega_documentos()
 
     chunks = cria_chunks(documentos)
     todos_os_chunks = chunks['cdc'] + chunks['lgpd']
 
-    return Chroma.from_documents(todos_os_chunks, embedding, persist_directory=str(db_dir), collection_name='documentos_juridicos')
+    return Chroma.from_documents(todos_os_chunks, embedding, persist_directory=str(db_dir), collection_name=collection_name)
 
 if __name__ == "__main__":
     banco = carrega_banco_vetorial()

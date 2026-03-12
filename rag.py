@@ -2,7 +2,6 @@ from typing import Any
 from itertools import chain
 import dotenv
 
-from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -46,7 +45,12 @@ def gera_contexto_de_documentos(documentos: list[Document]) -> str:
 banco_vetorial = bd.carrega_banco_vetorial()
 retriever = banco_vetorial.as_retriever(search_type='similarity', search_kwargs={'k': 5})
 
-llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_API_KEY'])
+if bd.use_ollama:
+    from langchain_ollama import ChatOllama
+    llm = ChatOllama(model='llama3.2')
+else:
+    from langchain_openai import ChatOpenAI
+    llm = ChatOpenAI(model=config['LLM_MODEL'], openai_api_key=config['OPENAI_API_KEY'])
 rag_prompt = ChatPromptTemplate.from_messages([
     (
         "system",
